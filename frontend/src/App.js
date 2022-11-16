@@ -1,37 +1,38 @@
 import React, { useState } from "react";
-
+import { useDispatch } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
+import { createUser } from "./features/users/userSlice";
 
 function App() {
-  const [formData, setFormData] = useState({
-    name: "",
-    Location: "",
-  });
+  const [nameInput, setNameInput] = useState("");
+  const [locationInput, setLocationInput] = useState("");
 
-  const onChange = (e) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
+  const dispatch = useDispatch();
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    dispatch(createUser({ nameInput, locationInput }));
+    setNameInput("");
+    setLocationInput("");
   };
 
-  const { Name, Location } = formData;
   return (
     <div className="App">
       <Container>
-        <h2 classname="text-center display-4">Details of People</h2>
+        <h2 className="text-center display-4">Details of People</h2>
         <Form>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Names</Form.Label>
             <Form.Control
               type="text"
               name="Name"
-              value={Name}
-              onChange={onChange}
+              value={nameInput}
+              onChange={(e) => setNameInput(e.target.value)}
               placeholder="Enter Name"
             />
           </Form.Group>
@@ -41,18 +42,18 @@ function App() {
             <Form.Control
               type="text"
               name="Location"
-              value={Location}
-              onChange={onChange}
+              value={locationInput}
+              onChange={(e) => setLocationInput(e.target.value)}
               placeholder="Location"
             />
           </Form.Group>
 
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" onSubmit={onSubmit}>
             Submit
           </Button>
         </Form>
 
-        <Table bordered Stripped className="mt-4">
+        <Table bordered className="mt-4">
           <thead>
             <tr>
               <th>No.</th>
