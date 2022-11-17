@@ -4,24 +4,24 @@ import userService from "./userService";
 const initialState = {
   Name: "",
   Location: "",
+  message: "",
+  isError: false,
+  isSuccess: false,
+  isLoading: false,
 };
 
 export const createUser = createAsyncThunk(
   "users/create",
-  async (userData, thunkAPI) => {
+  async ({ userData, toast }, { rejectWithValue }) => {
     try {
-      return await userService.createUser(userData);
+      const response = await userService.createUser(userData);
+      toast.success("User Added Successfully");
+      // navigate("/");
+      return response.data;
     } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      return thunkAPI.rejectWithValue(message);
+      // console.log(error);
+      rejectWithValue(error.response.data);
     }
-    // console.log(error);
-    // }
   }
 );
 
@@ -30,6 +30,22 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     reset: (state) => initialState,
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(createUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(createUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.user = action.payload;
+      })
+      .addCase(createUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      });
   },
 });
 
