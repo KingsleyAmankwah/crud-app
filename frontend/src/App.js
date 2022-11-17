@@ -6,17 +6,27 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
 import { createUser } from "./features/users/userSlice";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+// import toast from "react-toastify";
+import { toast } from "react-toastify";
 
 function App() {
-  const [nameInput, setNameInput] = useState("");
-  const [locationInput, setLocationInput] = useState("");
+  const [Name, setNameInput] = useState("");
+  const [Location, setLocationInput] = useState("");
 
   const dispatch = useDispatch();
+  // const navigate = useNavigate();
 
   const onSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(createUser({ nameInput, locationInput }));
+    const userData = {
+      Name,
+      Location,
+    };
+
+    dispatch(createUser({ userData, toast }));
     setNameInput("");
     setLocationInput("");
   };
@@ -26,23 +36,23 @@ function App() {
       <Container>
         <h2 className="text-center display-4">Details of People</h2>
         <Form method="POST" onSubmit={onSubmit}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3">
             <Form.Label>Names</Form.Label>
             <Form.Control
               type="text"
               name="Name"
-              value={nameInput}
+              value={Name}
               onChange={(e) => setNameInput(e.target.value)}
               placeholder="Enter Name"
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Group className="mb-3">
             <Form.Label>Location</Form.Label>
             <Form.Control
               type="text"
               name="Location"
-              value={locationInput}
+              value={Location}
               onChange={(e) => setLocationInput(e.target.value)}
               placeholder="Location"
             />
@@ -76,6 +86,7 @@ function App() {
             </tr>
           </tbody>
         </Table>
+        <ToastContainer />
       </Container>
     </div>
   );
