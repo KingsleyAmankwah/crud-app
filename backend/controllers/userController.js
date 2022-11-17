@@ -13,17 +13,17 @@ const createUser = asyncHandler(async (req, res) => {
     Location,
   });
 
-  // if (user) {
-  //   res.status(200).json({
-  //     _id: user._id,
-  //     Name: user.Name,
-  //     Location: user.Location,
-  //   });
-  user.save();
-  // } else {
-  //   res.status(400);
-  //   throw new Error("Something went wrong");
-  // }
+  if (user) {
+    res.status(200).json({
+      _id: user._id,
+      Name: user.Name,
+      Location: user.Location,
+    });
+    user.save();
+  } else {
+    res.status(400);
+    throw new Error("Something went wrong");
+  }
 });
 
 const getUser = async (req, res) => {
