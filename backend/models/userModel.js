@@ -2,9 +2,6 @@ const mongoose = require("mongoose");
 
 const userSchema = mongoose.Schema(
   {
-    Id: {
-      type: String,
-    },
     Name: {
       type: String,
       required: [true, "Please add this field"],
