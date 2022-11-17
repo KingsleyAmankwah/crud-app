@@ -25,7 +25,7 @@ function App() {
     <div className="App">
       <Container>
         <h2 className="text-center display-4">Details of People</h2>
-        <Form>
+        <Form method="POST" onSubmit={onSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Names</Form.Label>
             <Form.Control
@@ -48,7 +48,7 @@ function App() {
             />
           </Form.Group>
 
-          <Button variant="primary" type="submit" onSubmit={onSubmit}>
+          <Button variant="primary" type="submit">
             Submit
           </Button>
         </Form>
