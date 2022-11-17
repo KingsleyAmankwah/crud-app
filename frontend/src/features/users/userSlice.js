@@ -23,6 +23,18 @@ export const createUser = createAsyncThunk(
   }
 );
 
+export const getUsers = createAsyncThunk(
+  "users/get",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await userService.getUsers();
+      return response.data;
+    } catch (error) {
+      rejectWithValue(error.response.data);
+    }
+  }
+);
+
 export const userSlice = createSlice({
   name: "user",
   initialState,
