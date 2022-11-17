@@ -1,13 +1,11 @@
 import axios from "axios";
 
-const API_URL = "/api/users/";
+const API_URL = axios.create({ baseURL: "http://localhost:8000" });
+
+// export const createUser = (userData) => API_URL.post("/api/users/", userData);
 
 const createUser = async (userData) => {
-  const headers = {
-    "Content-Type": "application/json",
-    // Authorization: "JWT fefege...",
-  };
-  const response = await axios.post(API_URL, userData, headers);
+  const response = await API_URL.post("/api/users/", userData);
 
   return response.data;
 };
