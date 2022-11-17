@@ -8,8 +8,15 @@ const createUser = async (userData) => {
   return response.data;
 };
 
+const getUsers = async () => {
+  const response = await API_URL.get("/api/users/getUsers");
+
+  return response.data;
+};
+
 const userService = {
   createUser,
+  getUsers,
 };
 
 export default userService;
