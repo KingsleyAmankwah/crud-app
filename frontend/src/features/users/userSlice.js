@@ -16,10 +16,8 @@ export const createUser = createAsyncThunk(
     try {
       const response = await userService.createUser(userData);
       toast.success("User Added Successfully");
-      // navigate("/");
       return response.data;
     } catch (error) {
-      // console.log(error);
       rejectWithValue(error.response.data);
     }
   }
