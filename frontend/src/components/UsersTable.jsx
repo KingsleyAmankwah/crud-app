@@ -1,16 +1,17 @@
-import React, { useEffect } from "react";
+import React from "react";
+// import React, { useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
-import { useDispatch } from "react-redux";
-import { getUsers } from "../features/users/userSlice";
+// import { useDispatch, useSelector } from "react-redux";
+// import { getUsers } from "../features/users/userSlice";
 function UsersTable({ _id, Name, Location }) {
-  // const { users } = useSelector((state) => state.user);
+  // const { users } = useSelector((state) => ({ ...state.user }));
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getUsers);
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getUsers);
+  // }, [dispatch]);
 
   return (
     <div>
