@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
-function UsersTable({ users }) {
+import { useDispatch, useSelector } from "react-redux";
+import { getUsers } from "../features/users/userSlice";
+function UsersTable({ _id, Name, Location }) {
+  // const { users } = useSelector((state) => state.user);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUsers);
+  }, [dispatch]);
+
   return (
     <div>
       <Table bordered className="mt-4">
@@ -15,9 +25,9 @@ function UsersTable({ users }) {
         </thead>
         <tbody>
           <tr>
-            <td>1</td>
-            <td> {users.Name} </td>
-            <td> {users.Location} </td>
+            <td>{_id}</td>
+            <td> {Name} </td>
+            <td> {Location} </td>
             <td>
               <Button variant="info">Edit</Button>
               <Button className="ms-2" variant="danger">
