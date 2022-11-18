@@ -2,8 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import userService from "./userService";
 
 const initialState = {
-  Name: "",
-  Location: "",
+  user: {},
   message: "",
   isError: false,
   isSuccess: false,
@@ -36,7 +35,7 @@ export const getUsers = createAsyncThunk(
 );
 
 export const userSlice = createSlice({
-  name: "user",
+  name: "User Details",
   initialState,
   reducers: {
     reset: (state) => initialState,
