@@ -10,7 +10,7 @@ import UsersForm from "./components/UsersForm";
 import UsersTable from "./components/UsersTable";
 
 function App() {
-  const { user } = useSelector((state) => state.users);
+  const { users } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
 
@@ -26,7 +26,22 @@ function App() {
     <div className="App">
       <Container>
         <UsersForm />
-        <UsersTable key={user._id} />
+        <div>
+          {users && users.length > 0 ? (
+            <div>
+              {users &&
+                users.map((user) => (
+                  <UsersTable
+                    key={user._id}
+                    Name={user.Name}
+                    Location={user.Location}
+                  />
+                ))}
+            </div>
+          ) : (
+            <h4 className="text-center">No data</h4>
+          )}
+        </div>
         <ToastContainer />
       </Container>
     </div>
