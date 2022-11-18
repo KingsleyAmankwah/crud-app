@@ -14,9 +14,15 @@ const getUsers = async () => {
   return response.data;
 };
 
+const deleteUser = async (userId) => {
+  const response = await API_URL.delete(`/api/users/${userId}`);
+  return response.data;
+};
+
 const userService = {
   createUser,
   getUsers,
+  deleteUser,
 };
 
 export default userService;
