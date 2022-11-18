@@ -34,6 +34,19 @@ export const getUsers = createAsyncThunk(
   }
 );
 
+export const deleteUser = createAsyncThunk(
+  "users/delete",
+  async ({ userId, toast }, { rejectWithValue }) => {
+    try {
+      const response = await userService.deleteUser(userId);
+      toast.success("User deleted Successfully");
+      return response.data;
+    } catch (error) {
+      rejectWithValue(error.response.data);
+    }
+  }
+);
+
 export const userSlice = createSlice({
   name: "user",
   initialState,
