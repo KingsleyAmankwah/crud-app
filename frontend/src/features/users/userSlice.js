@@ -23,7 +23,7 @@ export const createUser = createAsyncThunk(
 );
 
 export const getUsers = createAsyncThunk(
-  "users/get",
+  "users/getAll",
   async (_, { rejectWithValue }) => {
     try {
       const response = await userService.getUsers();
@@ -35,7 +35,7 @@ export const getUsers = createAsyncThunk(
 );
 
 export const userSlice = createSlice({
-  name: "User Details",
+  name: "user",
   initialState,
   reducers: {
     reset: (state) => initialState,
