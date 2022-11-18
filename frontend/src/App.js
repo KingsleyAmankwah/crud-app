@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Container from "react-bootstrap/Container";
 
-import { getUsers, reset } from "./features/users/userSlice";
+import { getUsers } from "./features/users/userSlice";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import UsersForm from "./components/UsersForm";
@@ -17,9 +17,9 @@ function App() {
   useEffect(() => {
     dispatch(getUsers());
 
-    return () => {
-      dispatch(reset());
-    };
+    // return () => {
+    //   dispatch(reset());
+    // };
   }, [dispatch]);
 
   return (
@@ -27,31 +27,21 @@ function App() {
       <Container>
         <UsersForm />
 
-        {users &&
-          users.map((item) => (
-            <UsersTable
-              key={item._id}
-              Name={item.Name}
-              Location={item.Location}
-            />
-          ))}
+        {/* {users &&
+          users.map((index, item) => <UsersTable key={index} {...item} />)} */}
 
-        {/* <div>
+        <div>
           {users && users.length > 0 ? (
             <div>
               {users &&
-                users.map((item) => (
-                  <UsersTable
-                    key={item._id}
-                    Name={item.Name}
-                    Location={item.Location}
-                  />
+                users.map((index, item) => (
+                  <UsersTable key={index} {...item} />
                 ))}
             </div>
           ) : (
             <h4 className="text-center">No data</h4>
           )}
-        </div> */}
+        </div>
         <ToastContainer />
       </Container>
     </div>
