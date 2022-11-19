@@ -1,47 +1,54 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+// import React, { useEffect } from "react";
+// import { useDispatch, useSelector } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Container from "react-bootstrap/Container";
 
-import { getUsers } from "./features/users/userSlice";
+// import { getUsers } from "./features/users/userSlice";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import UsersForm from "./components/UsersForm";
 import UsersTable from "./components/UsersTable";
 
 function App() {
-  const { users } = useSelector((state) => ({ ...state.user }));
+  // const { users } = useSelector((state) => ({ ...state.user }));
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getUsers());
+  // useEffect(() => {
+  //   console.log(dispatch(getUsers()));
 
-    // return () => {
-    //   dispatch(reset());
-    // };
-  }, [dispatch]);
+  //   // return () => {
+  //   //   dispatch(reset());
+  //   // };
+  // }, [dispatch]);
 
   return (
     <div className="App">
       <Container>
         <UsersForm />
+        <UsersTable />
+        {/* 
+        {users &&
+          users.map((user) => <UsersTable key={user._id} user={user} />)} */}
 
-        {/* {users &&
-          users.map((index, item) => <UsersTable key={index} {...item} />)} */}
-
-        <div>
+        {/* <div>
           {users && users.length > 0 ? (
             <div>
               {users &&
-                users.map((index, item) => (
-                  <UsersTable key={index} {...item} />
-                ))}
+                users.map((item) =>
+                  // <UsersTable
+                  //   key={item._id}
+                  //   Name={item.Name}
+                  //   Location={item.Location}
+                  // />
+                  console.log({ ...item })
+                )}
             </div>
           ) : (
             <h4 className="text-center">No data</h4>
           )}
-        </div>
+        </div> */}
         <ToastContainer />
       </Container>
     </div>
