@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import userService from "./userService";
 
 const initialState = {
-  user: {},
+  user: [],
   message: "",
   isError: false,
   isSuccess: false,
@@ -27,6 +27,7 @@ export const getUsers = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await userService.getUsers();
+      console.log(response);
       return response.data;
     } catch (error) {
       rejectWithValue(error.response.data);
@@ -39,7 +40,7 @@ export const getUser = createAsyncThunk(
   async ({ userId }, { rejectWithValue }) => {
     try {
       const response = await userService.getUser(userId);
-      return response.data; 
+      return response.data;
     } catch (error) {
       rejectWithValue(error.response.data);
     }
@@ -85,7 +86,6 @@ export const userSlice = createSlice({
       })
       .addCase(getUsers.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
         state.user = action.payload;
       })
       .addCase(getUsers.rejected, (state, action) => {
