@@ -1,17 +1,17 @@
-import React from "react";
-// import React, { useEffect } from "react";
+// import React from "react";
+import React, { useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
-// import { useDispatch, useSelector } from "react-redux";
-// import { getUsers } from "../features/users/userSlice";
-function UsersTable({ _id, Name, Location }) {
-  // const { users } = useSelector((state) => ({ ...state.user }));
+import { useDispatch, useSelector } from "react-redux";
+import { getUsers } from "../features/users/userSlice";
+function UsersTable() {
+  const { users } = useSelector((state) => ({ ...state.user }));
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(getUsers);
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(getUsers());
+  }, [dispatch]);
 
   return (
     <div>
@@ -24,19 +24,22 @@ function UsersTable({ _id, Name, Location }) {
             <th>Action</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>{_id}</td>
-            <td> {Name} </td>
-            <td> {Location} </td>
-            <td>
-              <Button variant="info">Edit</Button>
-              <Button className="ms-2" variant="danger">
-                Delete
-              </Button>
-            </td>
-          </tr>
-        </tbody>
+        {users &&
+          users.map((user) => (
+            <tbody key={user._id}>
+              <tr>
+                <td>{user.Name}</td>
+                <td>{user.Location} </td>
+                <td>{new Date(user.createdAt).toLocaleString("en-US")}</td>
+                <td>
+                  <Button variant="info">Edit</Button>
+                  <Button className="ms-2" variant="danger">
+                    Delete
+                  </Button>
+                </td>
+              </tr>
+            </tbody>
+          ))}
       </Table>
     </div>
   );
