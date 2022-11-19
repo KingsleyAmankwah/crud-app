@@ -34,6 +34,18 @@ export const getUsers = createAsyncThunk(
   }
 );
 
+export const getUser = createAsyncThunk(
+  "users/getSingleUser",
+  async ({ userId }, { rejectWithValue }) => {
+    try {
+      const response = await userService.getUser(userId);
+      return response.data; 
+    } catch (error) {
+      rejectWithValue(error.response.data);
+    }
+  }
+);
+
 export const deleteUser = createAsyncThunk(
   "users/delete",
   async ({ userId, toast }, { rejectWithValue }) => {
