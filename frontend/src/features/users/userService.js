@@ -20,6 +20,12 @@ const getUser = async (userId) => {
   return response.data;
 };
 
+const updateUser = async (updatedData, userId) => {
+  const response = await API_URL.patch(`/api/users/${userId}`, updatedData);
+
+  return response.data;
+};
+
 const deleteUser = async (userId) => {
   const response = await API_URL.delete(`/api/users/${userId}`);
   return response.data;
@@ -29,6 +35,7 @@ const userService = {
   createUser,
   getUsers,
   getUser,
+  updateUser,
   deleteUser,
 };
 
