@@ -1,15 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import userService from "./userService";
 
-const initialState = {
-  users: [],
-  user: {},
-  message: "",
-  isError: false,
-  isSuccess: false,
-  isLoading: false,
-};
-
 export const createUser = createAsyncThunk(
   "users/create",
   async ({ userData, toast }, { rejectWithValue }) => {
@@ -63,7 +54,14 @@ export const deleteUser = createAsyncThunk(
 
 export const userSlice = createSlice({
   name: "user",
-  initialState,
+  initialState: {
+    users: [],
+    user: {},
+    message: "",
+    isError: false,
+    isSuccess: false,
+    isLoading: false,
+  },
 
   extraReducers: (builder) => {
     builder
@@ -73,7 +71,7 @@ export const userSlice = createSlice({
       .addCase(createUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.user = action.payload;
+        state.users = action.payload;
       })
       .addCase(createUser.rejected, (state, action) => {
         state.isLoading = false;
@@ -85,7 +83,7 @@ export const userSlice = createSlice({
       })
       .addCase(getUsers.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload;
+        state.users = action.payload;
       })
       .addCase(getUsers.rejected, (state, action) => {
         state.isLoading = false;
