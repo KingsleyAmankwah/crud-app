@@ -56,7 +56,7 @@ export const userSlice = createSlice({
   name: "user",
   initialState: {
     users: [],
-    user: {},
+    user: null,
     message: "",
     isError: false,
     isSuccess: false,
