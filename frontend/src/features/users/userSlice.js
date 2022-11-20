@@ -3,6 +3,7 @@ import userService from "./userService";
 
 const initialState = {
   users: [],
+  user: {},
   message: "",
   isError: false,
   isSuccess: false,
@@ -27,7 +28,7 @@ export const getUsers = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await userService.getUsers();
-      console.log(response);
+      // console.log(response);
       return response.data;
     } catch (error) {
       rejectWithValue(error.response.data);
@@ -63,9 +64,7 @@ export const deleteUser = createAsyncThunk(
 export const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {
-    reset: (state) => initialState,
-  },
+
   extraReducers: (builder) => {
     builder
       .addCase(createUser.pending, (state) => {
@@ -96,5 +95,4 @@ export const userSlice = createSlice({
   },
 });
 
-export const { reset } = userSlice.actions;
 export default userSlice.reducer;
