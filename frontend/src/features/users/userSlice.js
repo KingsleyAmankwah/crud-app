@@ -1,15 +1,36 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import userService from "./userService";
 
+// export const createUser = createAsyncThunk(
+//   "users/create",
+//   async ({ userData, toast }, { rejectWithValue }) => {
+//     try {
+//       const response = await userService.createUser(userData);
+//       toast.success("User Added Successfully");
+//       return response.data;
+//     } catch (error) {
+//       rejectWithValue(error.response.data);
+//     }
+//   }
+//);
+
+
+// Create new User
 export const createUser = createAsyncThunk(
   "users/create",
-  async ({ userData, toast }, { rejectWithValue }) => {
+  async (userData, thunkAPI) => {
     try {
-      const response = await userService.createUser(userData);
-      toast.success("User Added Successfully");
-      return response.data;
+      return await userService.createUser(userData);
     } catch (error) {
-      rejectWithValue(error.response.data);
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      console.log(message);
+      console.log(error.message);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
