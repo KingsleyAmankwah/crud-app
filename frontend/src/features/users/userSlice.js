@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import userService from "./userService";
+import { toast } from "react-toastify";
 
 const initialState = {
   user: null,
@@ -110,7 +111,10 @@ export const userSlice = createSlice({
       .addCase(createUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.users = action.payload;
+        // state.users = action.payload;
+        console.log(action.payload);
+        state.users.push(action.payload);
+        toast.success("User added successfully");
       })
       .addCase(createUser.rejected, (state, action) => {
         state.isLoading = false;
