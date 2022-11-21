@@ -17,9 +17,6 @@ function App() {
     dispatch(getUsers());
   }, [dispatch]);
 
-  // if (isLoading) {
-  //   return <div>...isLoading</div>;
-  // }
 
   return (
     <div className="App">
