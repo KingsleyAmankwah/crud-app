@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const SERVER_URL = process.env.BACKEND_URL;
-const API_URL = `${SERVER_URL}/api/users`;
+const SERVER_URL = "http://localhost:8000"; 
+const API_URL = `${SERVER_URL}/api/users/`;
 
 const createUser = async (userData) => {
   const response = await axios.post(API_URL, userData);
