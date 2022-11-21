@@ -6,8 +6,8 @@ import { getUsers } from "../features/users/userSlice";
 
 function UsersTable({ user }) {
   // const [users, setUsers] = useState([]);
-  const { profile } = useSelector((state) => state.user);
-
+  // const { profile } = useSelector((state) => state.user);
+  let index;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,24 +26,17 @@ function UsersTable({ user }) {
           </tr>
         </thead>
         <tbody>
-          {profile &&
-            profile.map((user, index) => {
-              const { _id, Name, Location } = user;
-
-              return (
-                <tr key={_id}>
-                  <td>{index + 1}</td>
-                  <td>{Name}</td>
-                  <td>{Location}</td>
-                  <td>
-                    <Button variant="info">Edit</Button>
-                    <Button className="ms-2" variant="danger">
-                      Delete
-                    </Button>
-                  </td>
-                </tr>
-              );
-            })}
+          <tr>
+            <td>1</td>
+            <td>{user.Name}</td>
+            <td>{user.Location}</td>
+            <td>
+              <Button variant="info">Edit</Button>
+              <Button className="ms-2" variant="danger">
+                Delete
+              </Button>
+            </td>
+          </tr>
         </tbody>
       </Table>
     </div>
