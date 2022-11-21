@@ -11,18 +11,7 @@ const initialState = {
   isLoading: false,
 };
 
-// export const createUser = createAsyncThunk(
-//   "users/create",
-//   async ({ userData, toast }, { rejectWithValue }) => {
-//     try {
-//       const response = await userService.createUser(userData);
-//       toast.success("User Added Successfully");
-//       return response.data;
-//     } catch (error) {
-//       rejectWithValue(error.response.data);
-//     }
-//   }
-//);
+
 
 // Create new User
 export const createUser = createAsyncThunk(
@@ -44,18 +33,7 @@ export const createUser = createAsyncThunk(
   }
 );
 
-// export const getUsers = createAsyncThunk(
-//   "users/getAll",
-//   async (_, { rejectWithValue }) => {
-//     try {
-//       const response = await userService.getUsers();
-//       console.log(response);
-//       return response.data;
-//     } catch (error) {
-//       rejectWithValue(error.response.data);
-//     }
-//   }
-// );
+
 // Get All Users
 export const getUsers = createAsyncThunk(
   "users/getAll",
