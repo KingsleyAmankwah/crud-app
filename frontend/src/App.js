@@ -17,11 +17,22 @@ function App() {
     dispatch(getUsers());
   }, [dispatch]);
 
+  // if (isLoading) {
+  //   return <div>...isLoading</div>;
+  // }
+
   return (
     <div className="App">
       <Container>
         <UsersForm />
-        <UsersTable />
+        {users.length > 0 ? (
+          <div>
+            {" "}
+            <UsersTable user={users} />{" "}
+          </div>
+        ) : (
+          <div>No data</div>
+        )}
         <ToastContainer />
       </Container>
     </div>
