@@ -64,7 +64,7 @@ const deleteUser = asyncHandler(async (req, res) => {
   }
 
   await user.remove();
-  // res.status(200).json({ message: `Delete s user ${req.params.id}` });
+  res.status(200).json({ message: "User deleted." });
 });
 
 module.exports = {
