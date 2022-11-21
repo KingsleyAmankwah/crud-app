@@ -22,7 +22,6 @@ function UsersTable({ user }) {
             <th>No.</th>
             <th>Name</th>
             <th>Location</th>
-
             <th>Action</th>
           </tr>
         </thead>
@@ -32,8 +31,8 @@ function UsersTable({ user }) {
               const { _id, Name, Location } = user;
 
               return (
-                <tr key={index}>
-                  <td>{_id}</td>
+                <tr key={_id}>
+                  <td>{index + 1}</td>
                   <td>{Name}</td>
                   <td>{Location}</td>
                   <td>
