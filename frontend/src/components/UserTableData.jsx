@@ -3,16 +3,20 @@ import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../features/users/userSlice";
+import Spinner from "./Spinner";
 
 function UserTableData() {
   const dispatch = useDispatch();
 
-  const { users } = useSelector((state) => state.user);
+  const { users, isLoading } = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(getUsers());
   }, [dispatch]);
 
+  if (isLoading) {
+    return <Spinner />;
+  }
   return (
     <div>
       <Table bordered className="mt-4">
@@ -25,25 +29,19 @@ function UserTableData() {
           </tr>
         </thead>
         <tbody>
-          {users.length > 0 ? (
-            <>
-              {users.map((user, index) => (
-                <tr key={user._id}>
-                  <td>{index + 1}</td>
-                  <td>{user.Name}</td>
-                  <td>{user.Location}</td>
-                  <td>
-                    <Button variant="info">Edit</Button>
-                    <Button className="ms-2" variant="danger">
-                      Delete
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-            </>
-          ) : (
-            <div>No data </div>
-          )}
+          {users.map((user, index) => (
+            <tr key={user._id}>
+              <td>{index + 1}</td>
+              <td>{user.Name}</td>
+              <td>{user.Location}</td>
+              <td>
+                <Button variant="info">Edit</Button>
+                <Button className="ms-2" variant="danger">
+                  Delete
+                </Button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </Table>
     </div>
