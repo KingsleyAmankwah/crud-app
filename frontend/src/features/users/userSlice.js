@@ -1,6 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import userService from "./userService";
 
+const initialState = {
+  user: null,
+  users: [],
+  message: "",
+  isError: false,
+  isSuccess: false,
+  isLoading: false,
+};
+
 // export const createUser = createAsyncThunk(
 //   "users/create",
 //   async ({ userData, toast }, { rejectWithValue }) => {
@@ -13,7 +22,6 @@ import userService from "./userService";
 //     }
 //   }
 //);
-
 
 // Create new User
 export const createUser = createAsyncThunk(
@@ -92,14 +100,7 @@ export const deleteUser = createAsyncThunk(
 
 export const userSlice = createSlice({
   name: "user",
-  initialState: {
-    users: [],
-    user: null,
-    message: "",
-    isError: false,
-    isSuccess: false,
-    isLoading: false,
-  },
+  initialState,
 
   extraReducers: (builder) => {
     builder
