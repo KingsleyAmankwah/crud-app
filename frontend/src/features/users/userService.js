@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 const SERVER_URL = process.env.BACKEND_URL;
 const API_URL = `${SERVER_URL}/api/users`;
 
@@ -16,8 +15,9 @@ const getUsers = async () => {
   return response.data;
 };
 
+//Get Single user
 const getUser = async (userId) => {
-  const response = await API_URL.get(`/api/users/getUser/${userId}`);
+  const response = await axios.get(API_URL + userId);
 
   return response.data;
 };
