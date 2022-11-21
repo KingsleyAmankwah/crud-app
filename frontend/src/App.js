@@ -4,32 +4,25 @@ import Container from "react-bootstrap/Container";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import UsersForm from "./components/UsersForm";
-import UsersTable from "./components/UsersTable";
+// import UsersTable from "./components/UsersTable";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "./features/users/userSlice";
+import UserTableData from "./components/UserTableData";
 
 function App() {
   const dispatch = useDispatch();
 
-  const { users } = useSelector((state) => state.user);
+  // const { users } = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(getUsers());
   }, [dispatch]);
 
-
   return (
     <div className="App">
       <Container>
         <UsersForm />
-        {users.length > 0 ? (
-          <div>
-            {users &&
-              users.map((user) => <UsersTable key={user._id} user={user} />)}
-          </div>
-        ) : (
-          <div>No data</div>
-        )}
+        <UserTableData />
         <ToastContainer />
       </Container>
     </div>
