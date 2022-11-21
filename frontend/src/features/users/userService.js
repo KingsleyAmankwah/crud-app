@@ -29,7 +29,7 @@ const updateUser = async (updatedData, userId) => {
 };
 
 const deleteUser = async (userId) => {
-  const response = await API_URL.delete(`/api/users/${userId}`);
+  const response = await axios.delete(API_URL + userId);
   return response.data;
 };
 
