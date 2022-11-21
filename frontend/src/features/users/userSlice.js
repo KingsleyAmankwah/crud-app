@@ -58,7 +58,7 @@ export const createUser = createAsyncThunk(
 // );
 // Get All Users
 export const getUsers = createAsyncThunk(
-  "products/getAll",
+  "users/getAll",
   async (_, thunkAPI) => {
     try {
       return await userService.getUsers();
@@ -111,8 +111,7 @@ export const userSlice = createSlice({
       .addCase(createUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        // state.users = action.payload;
-        console.log(action.payload);
+        // console.log(action.payload);
         state.users.push(action.payload);
         toast.success("User added successfully");
       })
@@ -120,19 +119,21 @@ export const userSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
+        toast.error(action.payload);
       })
       .addCase(getUsers.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(getUsers.fulfilled, (state, action) => {
         state.isLoading = false;
-        console.log(action.payload);
+        // console.log(action.payload);
         state.users = action.payload;
       })
       .addCase(getUsers.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
+        toast.error(action.payload);
       });
   },
 });
