@@ -3,7 +3,6 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useDispatch } from "react-redux";
 import { createUser } from "../features/users/userSlice";
-import { toast } from "react-toastify";
 
 function UsersForm() {
   const [Name, setNameInput] = useState("");
@@ -19,9 +18,7 @@ function UsersForm() {
       Location,
     };
 
-    dispatch(createUser({ userData, toast }));
-    setNameInput("");
-    setLocationInput("");
+    dispatch(createUser(userData));
   };
 
   return (
