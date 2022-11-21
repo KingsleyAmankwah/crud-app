@@ -5,11 +5,13 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import UsersForm from "./components/UsersForm";
 import UsersTable from "./components/UsersTable";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "./features/users/userSlice";
 
 function App() {
   const dispatch = useDispatch();
+
+  const { users } = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(getUsers());
