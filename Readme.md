@@ -1,6 +1,12 @@
-# NODEJS CRUD app
+# MERN STACK CRUD APP
 
-This is a node app from the.
+This is a full-stack crud-app for beginners starting out their Mern stack journey.
+
+# Stack
+Frontend - ReactJs
+Backend - NodeJs
+Database - MongoDB
+State management - Redux toolkit
 
 ## Usage
 
