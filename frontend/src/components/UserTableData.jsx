@@ -33,23 +33,31 @@ function UserTableData() {
           </tr>
         </thead>
         <tbody>
-          {users.map((user, index) => (
-            <tr key={user._id}>
-              <td>{index + 1}</td>
-              <td>{user.Name}</td>
-              <td>{user.Location}</td>
-              <td>
-                <Button variant="info">Edit</Button>
-                <Button
-                  className="ms-2"
-                  variant="danger"
-                  onClick={() => dispatch(deleteUser(user._id))}
-                >
-                  Delete
-                </Button>
-              </td>
-            </tr>
-          ))}
+          {users.length > 0 ? (
+            <>
+              {users.map((user, index) => (
+                <tr key={user._id}>
+                  <td>{index + 1}</td>
+                  <td>{user.Name}</td>
+                  <td>{user.Location}</td>
+                  <td>
+                    <Button variant="info">Edit</Button>
+                    <Button
+                      className="ms-2"
+                      variant="danger"
+                      onClick={() => dispatch(deleteUser(user._id))}
+                    >
+                      Delete
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </>
+          ) : (
+            <td className="text-center" colSpan={5}>
+              No data available{" "}
+            </td>
+          )}
         </tbody>
       </Table>
     </div>
