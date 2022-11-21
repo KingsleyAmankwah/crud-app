@@ -23,7 +23,7 @@ const getUser = async (userId) => {
 };
 
 const updateUser = async (updatedData, userId) => {
-  const response = await API_URL.patch(`/api/users/${userId}`, updatedData);
+  const response = await axios.patch(`${API_URL}${userId}`, updatedData);
 
   return response.data;
 };
