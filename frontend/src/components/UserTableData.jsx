@@ -2,17 +2,21 @@ import React, { useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../features/users/userSlice";
+import { getUsers, deleteUser, reset } from "../features/users/userSlice";
 import Spinner from "./Spinner";
 
 function UserTableData() {
   const dispatch = useDispatch();
 
-  const { users, isLoading } = useSelector((state) => state.user);
+  const { users, isLoading, isSuccess } = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(getUsers());
-  }, [dispatch]);
+
+    if (isSuccess) {
+      dispatch(reset());
+    }
+  }, [dispatch, isSuccess]);
 
   if (isLoading) {
     return <Spinner />;
@@ -36,7 +40,11 @@ function UserTableData() {
               <td>{user.Location}</td>
               <td>
                 <Button variant="info">Edit</Button>
-                <Button className="ms-2" variant="danger">
+                <Button
+                  className="ms-2"
+                  variant="danger"
+                  onClick={() => dispatch(deleteUser(user._id))}
+                >
                   Delete
                 </Button>
               </td>
