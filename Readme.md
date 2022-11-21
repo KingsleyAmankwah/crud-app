@@ -2,12 +2,15 @@
 
 This is a full-stack crud-app for beginners starting out their Mern stack journey.
 
-# Stack
+# Tech Stack
+
+```
 Frontend - ReactJs
 Backend - NodeJs
 Database - MongoDB
 State management - Redux toolkit
 
+```
 ## Usage
 
 Rename the .envexample to .env and add your MONGO_URI
