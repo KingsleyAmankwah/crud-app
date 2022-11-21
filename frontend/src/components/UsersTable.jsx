@@ -1,13 +1,10 @@
 import React, { useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getUsers } from "../features/users/userSlice";
 
 function UsersTable({ user }) {
-  // const [users, setUsers] = useState([]);
-  // const { profile } = useSelector((state) => state.user);
-  let index;
   const dispatch = useDispatch();
 
   useEffect(() => {
