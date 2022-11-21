@@ -11,7 +11,7 @@ const createUser = async (userData) => {
 };
 
 const getUsers = async () => {
-  const response = await API_URL.get("/api/users/getUsers");
+  const response = await axios.get(API_URL);
 
   return response.data;
 };
