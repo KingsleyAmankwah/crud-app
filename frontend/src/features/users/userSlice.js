@@ -11,8 +11,6 @@ const initialState = {
   isLoading: false,
 };
 
-
-
 // Create new User
 export const createUser = createAsyncThunk(
   "users/create",
@@ -33,7 +31,6 @@ export const createUser = createAsyncThunk(
   }
 );
 
-
 // Get All Users
 export const getUsers = createAsyncThunk(
   "users/getAll",
@@ -52,27 +49,20 @@ export const getUsers = createAsyncThunk(
   }
 );
 
-export const getUser = createAsyncThunk(
-  "users/getSingleUser",
-  async ({ userId }, { rejectWithValue }) => {
-    try {
-      const response = await userService.getUser(userId);
-      return response.data;
-    } catch (error) {
-      rejectWithValue(error.response.data);
-    }
-  }
-);
-
+// Delete user goal
 export const deleteUser = createAsyncThunk(
   "users/delete",
-  async ({ userId, toast }, { rejectWithValue }) => {
+  async (id, thunkAPI) => {
     try {
-      const response = await userService.deleteUser(userId);
-      toast.success("User deleted Successfully");
-      return response.data;
+      return await userService.deleteUser(id);
     } catch (error) {
-      rejectWithValue(error.response.data);
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -80,6 +70,9 @@ export const deleteUser = createAsyncThunk(
 export const userSlice = createSlice({
   name: "user",
   initialState,
+  reducers: {
+    reset: (state) => initialState,
+  },
 
   extraReducers: (builder) => {
     builder
@@ -104,7 +97,6 @@ export const userSlice = createSlice({
       })
       .addCase(getUsers.fulfilled, (state, action) => {
         state.isLoading = false;
-        // console.log(action.payload);
         state.users = action.payload;
       })
       .addCase(getUsers.rejected, (state, action) => {
@@ -112,8 +104,25 @@ export const userSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
         toast.error(action.payload);
+      })
+      .addCase(deleteUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.users = state.users.filter(
+          (user) => user._id !== action.payload.id
+        );
+        toast.success("User Deleted Successfully");
+      })
+      .addCase(deleteUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        toast.error(action.payload);
       });
   },
 });
-
+export const { reset } = userSlice.actions;
 export default userSlice.reducer;
