@@ -14,15 +14,32 @@ export const createUser = createAsyncThunk(
   }
 );
 
+// export const getUsers = createAsyncThunk(
+//   "users/getAll",
+//   async (_, { rejectWithValue }) => {
+//     try {
+//       const response = await userService.getUsers();
+//       console.log(response);
+//       return response.data;
+//     } catch (error) {
+//       rejectWithValue(error.response.data);
+//     }
+//   }
+// );
+// Get All Users
 export const getUsers = createAsyncThunk(
-  "users/getAll",
-  async (_, { rejectWithValue }) => {
+  "products/getAll",
+  async (_, thunkAPI) => {
     try {
-      const response = await userService.getUsers();
-      // console.log(response);
-      return response.data;
+      return await userService.getUsers();
     } catch (error) {
-      rejectWithValue(error.response.data);
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -83,6 +100,7 @@ export const userSlice = createSlice({
       })
       .addCase(getUsers.fulfilled, (state, action) => {
         state.isLoading = false;
+        console.log(action.payload);
         state.users = action.payload;
       })
       .addCase(getUsers.rejected, (state, action) => {
