@@ -27,9 +27,9 @@ function UserTableData() {
         <tbody>
           {users.length > 0 ? (
             <>
-              {users.map((user) => (
+              {users.map((user, index) => (
                 <tr key={user._id}>
-                  <td>1</td>
+                  <td>{index + 1}</td>
                   <td>{user.Name}</td>
                   <td>{user.Location}</td>
                   <td>
