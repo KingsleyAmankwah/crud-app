@@ -5,7 +5,7 @@ const SERVER_URL = process.env.BACKEND_URL;
 const API_URL = `${SERVER_URL}/api/users`;
 
 const createUser = async (userData) => {
-  const response = await API_URL.post("/api/users/", userData);
+  const response = await axios.post(API_URL, userData);
 
   return response.data;
 };
