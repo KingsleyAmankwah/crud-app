@@ -27,8 +27,8 @@ function App() {
         <UsersForm />
         {users.length > 0 ? (
           <div>
-            {" "}
-            <UsersTable user={users} />{" "}
+            {users &&
+              users.map((user) => <UsersTable key={user._id} user={user} />)}
           </div>
         ) : (
           <div>No data</div>
