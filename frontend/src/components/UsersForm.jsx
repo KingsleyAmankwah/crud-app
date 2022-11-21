@@ -25,7 +25,7 @@ function UsersForm() {
 
   return (
     <div>
-      <h2 className="text-center display-4">Details of People</h2>
+      <h2 className="text-center display-5">MERN Stack CRUD-APP</h2>
       <Form method="POST" onSubmit={onSubmit}>
         <Form.Group className="mb-3">
           <Form.Label>Names</Form.Label>
