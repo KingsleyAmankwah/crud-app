@@ -19,6 +19,8 @@ function UsersForm() {
     };
 
     dispatch(createUser(userData));
+    setNameInput("");
+    setLocationInput("");
   };
 
   return (
