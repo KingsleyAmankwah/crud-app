@@ -69,7 +69,7 @@ export const deleteUser = createAsyncThunk(
 
 
 // Get Single User
-export const getYser = createAsyncThunk(
+export const getUser = createAsyncThunk(
   "products/getProduct",
   async (id, thunkAPI) => {
     try {
