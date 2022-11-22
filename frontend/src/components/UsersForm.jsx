@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+// import { useEffect } from "react";
+// import { useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { useDispatch, useSelector } from "react-redux";
-import { createUser, getUser, selectUser } from "../features/users/userSlice";
+import { useDispatch } from "react-redux";
+import { createUser } from "../features/users/userSlice";
 
 function UsersForm() {
   const dispatch = useDispatch();
