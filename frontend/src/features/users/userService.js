@@ -3,6 +3,7 @@ import axios from "axios";
 const SERVER_URL = "http://localhost:8000";
 const API_URL = `${SERVER_URL}/api/users/`;
 
+//Create User
 const createUser = async (userData) => {
   const response = await axios.post(API_URL, userData);
 
@@ -22,12 +23,14 @@ const getUser = async (id) => {
   return response.data;
 };
 
+//Update user
 const updateUser = async (updatedData, userId) => {
   const response = await axios.patch(`${API_URL}${userId}`, updatedData);
 
   return response.data;
 };
 
+//Delete User
 const deleteUser = async (id) => {
   const response = await axios.delete(API_URL + id);
   return response.data;
