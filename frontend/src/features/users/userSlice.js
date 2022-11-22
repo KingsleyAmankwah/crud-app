@@ -67,10 +67,9 @@ export const deleteUser = createAsyncThunk(
   }
 );
 
-
 // Get Single User
 export const getUser = createAsyncThunk(
-  "products/getProduct",
+  "users/getUser",
   async (id, thunkAPI) => {
     try {
       return await userService.getUser(id);
