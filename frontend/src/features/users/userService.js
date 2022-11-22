@@ -16,8 +16,8 @@ const getUsers = async () => {
 };
 
 //Get Single user
-const getUser = async (userId) => {
-  const response = await axios.get(API_URL + userId);
+const getUser = async (id) => {
+  const response = await axios.get(API_URL + id);
 
   return response.data;
 };
