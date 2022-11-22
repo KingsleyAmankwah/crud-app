@@ -1,14 +1,29 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { useDispatch } from "react-redux";
-import { createUser } from "../features/users/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { createUser, getUser, selectUser } from "../features/users/userSlice";
 
 function UsersForm() {
+  const dispatch = useDispatch();
+  const { id } = useParams();
+
   const [Name, setNameInput] = useState("");
   const [Location, setLocationInput] = useState("");
 
-  const dispatch = useDispatch();
+  const userEdit = useSelector(selectUser);
+  const [user, setUser] = useState(userEdit);
+
+  useEffect(() => {
+    dispatch(getUser(id));
+  }, [dispatch, id]);
+
+  useEffect(() => {
+    setUser(userEdit);
+    console.log(userEdit);
+  }, [userEdit]);
 
   const onSubmit = (e) => {
     e.preventDefault();
