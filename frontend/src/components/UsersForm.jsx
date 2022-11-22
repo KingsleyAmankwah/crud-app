@@ -8,22 +8,22 @@ import { createUser, getUser, selectUser } from "../features/users/userSlice";
 
 function UsersForm() {
   const dispatch = useDispatch();
-  const { id } = useParams();
+  // const { id } = useParams();
 
   const [Name, setNameInput] = useState("");
   const [Location, setLocationInput] = useState("");
 
-  const userEdit = useSelector(selectUser);
-  const [user, setUser] = useState(userEdit);
+  // const userEdit = useSelector(selectUser);
+  // const [user, setUser] = useState(userEdit);
 
-  useEffect(() => {
-    dispatch(getUser(id));
-  }, [dispatch, id]);
+  // useEffect(() => {
+  //   dispatch(getUser(id));
+  // }, [dispatch, id]);
 
-  useEffect(() => {
-    setUser(userEdit);
-    console.log(userEdit);
-  }, [userEdit]);
+  // useEffect(() => {
+  //   setUser(userEdit);
+  //   console.log(userEdit);
+  // }, [userEdit]);
 
   const onSubmit = (e) => {
     e.preventDefault();
