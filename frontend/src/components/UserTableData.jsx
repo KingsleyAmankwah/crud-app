@@ -2,7 +2,12 @@ import React, { useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers, deleteUser, reset } from "../features/users/userSlice";
+import {
+  getUsers,
+  getUser,
+  deleteUser,
+  reset,
+} from "../features/users/userSlice";
 import Spinner from "./Spinner";
 
 function UserTableData() {
@@ -41,7 +46,12 @@ function UserTableData() {
                   <td>{user.Name}</td>
                   <td>{user.Location}</td>
                   <td>
-                    <Button variant="info">Edit</Button>
+                    <Button
+                      variant="info"
+                      onClick={() => dispatch(getUser(user._id))}
+                    >
+                      Edit
+                    </Button>
                     <Button
                       className="ms-2"
                       variant="danger"
