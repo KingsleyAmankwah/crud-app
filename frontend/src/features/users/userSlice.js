@@ -67,6 +67,25 @@ export const deleteUser = createAsyncThunk(
   }
 );
 
+
+// Get Single User
+export const getYser = createAsyncThunk(
+  "products/getProduct",
+  async (id, thunkAPI) => {
+    try {
+      return await userService.getUser(id);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const userSlice = createSlice({
   name: "user",
   initialState,
