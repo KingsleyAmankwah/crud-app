@@ -32,38 +32,41 @@ function UserTableData() {
             <th>Action</th>
           </tr>
         </thead>
-        <tbody>
-          {users.length > 0 ? (
-            <>
-              {users.map((user, index) => (
-                <tr key={user._id}>
-                  <td>{index + 1}</td>
-                  <td>{user.Name}</td>
-                  <td>{user.Location}</td>
-                  <td>
-                    <Button
-                      variant="info"
-                      // onClick={() => dispatch(getUser(user._id))}
-                    >
-                      Edit
-                    </Button>
-                    <Button
-                      className="ms-2"
-                      variant="danger"
-                      onClick={() => dispatch(deleteUser(user._id))}
-                    >
-                      Delete
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-            </>
-          ) : (
-            <td className="text-center" colSpan={5}>
-              No data available{" "}
-            </td>
-          )}
-        </tbody>
+
+        {users.length > 0 ? (
+          <tbody>
+            {users.map((user, index) => (
+              <tr key={user._id}>
+                <td>{index + 1}</td>
+                <td>{user.Name}</td>
+                <td>{user.Location}</td>
+                <td>
+                  <Button
+                    variant="info"
+                    // onClick={() => dispatch(getUser(user._id))}
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    className="ms-2"
+                    variant="danger"
+                    onClick={() => dispatch(deleteUser(user._id))}
+                  >
+                    Delete
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        ) : (
+          <tbody>
+            <tr>
+              <td className="text-center" colSpan={5}>
+                No data available{" "}
+              </td>
+            </tr>
+          </tbody>
+        )}
       </Table>
     </div>
   );
