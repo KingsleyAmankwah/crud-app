@@ -1,4 +1,5 @@
 const asyncHandler = require("express-async-handler");
+const { default: mongoose } = require("mongoose");
 const User = require("../models/userModel");
 
 const createUser = asyncHandler(async (req, res) => {
@@ -32,15 +33,23 @@ const getUsers = asyncHandler(async (req, res) => {
 });
 
 const getUser = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id);
-  if (user) {
+  const valid = mongoose.Types.ObjectId.isValid(req.params.id);
+
+  if (valid) {
+    const user = await User.findById(req.params.id);
+
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.status(404);
+      throw new Error("User not found");
+    }
+
     res.status(200).json(user);
   } else {
-    res.status(404);
-    throw new Error("User not found");
+    res.status(500);
+    throw new Error("Server error");
   }
-
-  res.status(200).json(user);
 });
 
 const updateUser = asyncHandler(async (req, res) => {
