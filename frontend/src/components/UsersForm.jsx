@@ -1,41 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import { useEffect } from "react";
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { useDispatch } from "react-redux";
-import { createUser } from "../features/users/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { createUser, getUser } from "../features/users/userSlice";
 
 function UsersForm() {
   const dispatch = useDispatch();
-  // const { id } = useParams();
 
-  const [Name, setNameInput] = useState("");
-  const [Location, setLocationInput] = useState("");
+  const { id } = useParams();
+  // console.log(id);
 
-  // const userEdit = useSelector(selectUser);
-  // const [user, setUser] = useState(userEdit);
+  const [userData, setUserData] = useState({
+    Name: "",
+    Location: "",
+  });
 
-  // useEffect(() => {
-  //   dispatch(getUser(id));
-  // }, [dispatch, id]);
+  const { Name, Location } = userData;
 
-  // useEffect(() => {
-  //   setUser(userEdit);
-  //   console.log(userEdit);
-  // }, [userEdit]);
+  const onChange = (e) => {
+    setUserData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+  // const [Name, setNameInput] = useState("");
+  // const [Location, setLocationInput] = useState("");
+
+  const { users } = useSelector((state) => ({ ...state.user }));
+
+  useEffect(() => {
+    // if (id) {
+    //   // const getSingleUser = users.find((user) => user._id === id);
+    //   // console.log(getSingleUser);
+    //   // setUserData({ ...getSingleUser });
+    // }
+  }, [id, users, dispatch]);
 
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const userData = {
+    const formData = {
       Name,
       Location,
     };
 
-    dispatch(createUser(userData));
-    setNameInput("");
-    setLocationInput("");
+    dispatch(createUser(formData));
+    // userData("");
+    // setNameInput("");
+    // setLocationInput("");
+    handleClear();
+  };
+
+  const handleClear = () => {
+    setUserData({ Name: "", Location: "" });
   };
 
   return (
@@ -48,7 +67,7 @@ function UsersForm() {
             type="text"
             name="Name"
             value={Name}
-            onChange={(e) => setNameInput(e.target.value)}
+            onChange={onChange}
             placeholder="Enter Name"
           />
         </Form.Group>
@@ -59,13 +78,13 @@ function UsersForm() {
             type="text"
             name="Location"
             value={Location}
-            onChange={(e) => setLocationInput(e.target.value)}
+            onChange={onChange}
             placeholder="Location"
           />
         </Form.Group>
 
         <Button variant="primary" type="submit">
-          Submit
+          {id ? "Update" : "Submit"}
         </Button>
       </Form>
     </div>
