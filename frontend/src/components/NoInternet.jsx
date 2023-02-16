@@ -1,19 +1,14 @@
-import React from "react";
-
+import notFound from "../images/NotFound.png";
 const NoInternet = () => {
   return (
     <div
       className={`bg-cover bg-center h-screen flex flex-col items-center justify-center`}
-      //   style={{
-      //     backgroundImage: `url('./images/notFound.png')`,
-      //   }}
     >
-      <div>
+      <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
         <img
-          src="./images/notFound.png"
-          alt=""
-          className="w-full h-auto
-        "
+          src={notFound}
+          alt="not Found"
+          className="object-cover object-center rounded"
         />
       </div>
       <h1 className="text-3xl text-black font-bold mb-4">
