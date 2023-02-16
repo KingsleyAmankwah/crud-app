@@ -2,7 +2,7 @@
 
 This is a full-stack CRUD Application for developers starting out their journey in the Mern stack.
 
-## :rocket: [Demo](https://pterest-clone.netlify.app/)
+<!-- ## :rocket: [Demo]() -->
 
 ## :sparkles: Features
 
