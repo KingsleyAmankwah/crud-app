@@ -1,39 +1,48 @@
-# MERN STACK CRUD APP
+## :dart: About
 
-This is a full-stack crud-app for beginners starting out their Mern stack journey.
+This is a full-stack CRUD Application for developers starting out their journey in the Mern stack.
 
-# Tech Stack
+## :rocket: [Demo](https://pterest-clone.netlify.app/)
 
-```
-Frontend - ReactJs
-Backend - NodeJs
-Database - MongoDB
-State management - Redux toolkit
+## :sparkles: Features
 
-```
-## Usage
+:heavy_check_mark: Add Tasks;\
+:heavy_check_mark: Delete Tasks;\
+:heavy_check_mark: Edit and Update;\
+:heavy_check_mark: Checks Internet Connectivity;
 
-Rename the .envexample to .env and add your MONGO_URI
+## :rocket: Technologies
 
-### Install dependencies
+The following tools were used in this project:
 
-```
+- [MongoDB](https://www.mongodb.com/)
+- [ExpressJs](https://expressjs.com/)
+- [React.js](https://reactjs.org/)
+- [NodeJs](https://nodejs.org/en/)
+- [Redux](https://redux.js.org/)
+- [TailwindCSS](https://tailwindcss.com)
+
+## :white_check_mark: Requirements
+
+Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Node](https://nodejs.org/en/) installed.
+
+## :checkered_flag: Starting
+
+```bash
+# Clone this project
+$ git clone https://github.com/KingsleyAmankwah/Pinterest-clone
+
 # Backend dependencies
 npm install
 
 # Frontend dependencies
 cd frontend
 npm install
-```
 
-### Run Server
 
-```
+# Run Server
 npm run server
-```
 
-### Run Frontend
-
-```
+# Run Frontend
 npm run client
 ```
