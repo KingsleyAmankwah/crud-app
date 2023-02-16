@@ -20,8 +20,8 @@ const deleteTodo = async (id) => {
   return response.data.message;
 };
 
-const updateTodo = async (id) => {
-  const response = await axios.put(API_URL + id);
+const updateTodo = async (id, todoData) => {
+  const response = await axios.put(API_URL + id, todoData);
 
   return response.data;
 };
