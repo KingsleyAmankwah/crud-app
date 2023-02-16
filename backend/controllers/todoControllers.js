@@ -18,13 +18,12 @@ const addTask = asyncHandler(async (req, res) => {
 });
 
 const deleteTask = asyncHandler(async (req, res) => {
-  await Task.deleteOne({ _id: req.params.id }, (error) => {
-    if (error) {
-      return res.status(500).send({ message: error });
-    } else {
-      return res.send({ message: "Task deleted successfully!" });
-    }
-  });
+  try {
+    await Task.deleteOne({ _id: req.params.id });
+    return res.send({ message: "Task deleted successfully!" });
+  } catch (error) {
+    return res.status(500).send({ message: error });
+  }
 });
 
 const getAllTasks = asyncHandler(async (req, res) => {
