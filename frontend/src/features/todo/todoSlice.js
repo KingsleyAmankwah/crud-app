@@ -1,6 +1,7 @@
 import todoService from "./todoService";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { extractErrorMessage } from "../../utils/index";
+import { toast } from "react-toastify";
 
 const initialState = {
   todo: null,
@@ -11,9 +12,9 @@ const initialState = {
 
 export const addTodo = createAsyncThunk(
   "todo/addTodo",
-  async (userData, thunkAPI) => {
+  async (todoData, thunkAPI) => {
     try {
-      return await todoService.addTodo(userData);
+      return await todoService.addTodo(todoData);
     } catch (error) {
       return thunkAPI.rejectWithValue(extractErrorMessage(error));
     }
@@ -33,9 +34,9 @@ export const getAllTodo = createAsyncThunk(
 
 export const updateTodo = createAsyncThunk(
   "todo/updateTodo",
-  async (id, thunkAPI) => {
+  async ({ id, todoData }, thunkAPI) => {
     try {
-      return await todoService.updateTodo(id);
+      return await todoService.updateTodo(id, todoData);
     } catch (error) {
       return thunkAPI.rejectWithValue(extractErrorMessage(error));
     }
@@ -62,6 +63,7 @@ const todoSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(getAllTodo.fulfilled, (state, action) => {
+        state.isLoading = false;
         state.todos = action.payload;
       })
       .addCase(getAllTodo.rejected, (state, action) => {
@@ -72,6 +74,7 @@ const todoSlice = createSlice({
       })
       .addCase(addTodo.fulfilled, (state, action) => {
         state.todo = action.payload;
+        toast.success("Task added successfully");
       })
       .addCase(addTodo.rejected, (state, action) => {
         state.message = action.payload;
@@ -81,18 +84,24 @@ const todoSlice = createSlice({
       })
       .addCase(updateTodo.fulfilled, (state, action) => {
         state.todo = action.payload;
+        toast.info("Task updated successfully");
+        state.isLoading = false;
       })
       .addCase(updateTodo.rejected, (state, action) => {
         state.message = action.payload;
+        state.isLoading = false;
       })
       .addCase(deleteTodo.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(deleteTodo.fulfilled, (state, action) => {
         state.todo = action.payload;
+        toast.info("Task deleted successfully");
+        state.isLoading = false;
       })
       .addCase(deleteTodo.rejected, (state, action) => {
         state.message = action.payload;
+        state.isLoading = false;
       });
   },
 });
