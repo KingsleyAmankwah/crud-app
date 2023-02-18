@@ -18,7 +18,6 @@ The following tools were used in this project:
 - [MongoDB](https://www.mongodb.com/)
 - [ExpressJs](https://expressjs.com/)
 - [React.js](https://reactjs.org/)
-- [NodeJs](https://nodejs.org/en/)
 - [Redux](https://redux.js.org/)
 - [TailwindCSS](https://tailwindcss.com)
 
@@ -39,6 +38,8 @@ npm install
 cd frontend
 npm install
 
+# Usage
+Rename the .envexample to .env and add your MONGO_URI
 
 # Run Server
 npm run server
